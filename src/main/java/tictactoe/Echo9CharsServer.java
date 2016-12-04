@@ -18,7 +18,7 @@ public class Echo9CharsServer {
 				LOGGER.info(param);
 				if (param.length() > 9)
 					throw new IllegalArgumentException();
-				return param.replaceAll("\\+", " ") + "new version";
+				return param.replaceAll("\\+", " ") + "\nchecking for easier push";
 			} catch (IllegalArgumentException e) {
 				res.status(400);
 				return "";
