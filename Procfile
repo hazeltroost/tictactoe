@@ -1,1 +1,1 @@
-web: java -jar /target/tictactoe.jar 80
+web: java -jar ./target/tictactoe.jar 80
