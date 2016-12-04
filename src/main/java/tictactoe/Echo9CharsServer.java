@@ -9,7 +9,9 @@ public class Echo9CharsServer {
 	private static final Logger LOGGER = LoggerFactory.getLogger(Echo9CharsServer.class);
 
 	public static void main(String[] args) {
-		Spark.port(5555);
+		if (args.length ==1) {
+			Spark.port(Integer.parseInt(args[0]));
+		}
 		Spark.get("/echo", (req, res) -> {
 			try {
 				String param = req.queryParams("content");
