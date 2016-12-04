@@ -10,7 +10,7 @@ public class Echo9CharsServer {
 
 	public static void main(String[] args) {
 		if (args.length ==1) {
-			Spark.port(Integer.parseInt(args[0]));
+			Spark.port(Integer.valueOf(System.getenv("PORT")));
 		}
 		Spark.get("/echo", (req, res) -> {
 			try {
