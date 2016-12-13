@@ -30,10 +30,10 @@ public class Board implements Comparable<Board> {
 	}
 
 	int determineOutcome() {
-		if (outcome == -3) {
+		if (outcome == -3) { //no win/loss/draw call has been made yet
 			outcome = getDecision();
 		}
-		if (outcome == -2) {
+		if (outcome == -2) { //call was made, board is in play
 			outcome = getResponse().determineOutcome();
 			return outcome;
 		}
