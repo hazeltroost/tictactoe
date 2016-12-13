@@ -64,7 +64,7 @@
           <appendAssemblyId>false</appendAssemblyId>
           <archive>
             <manifest>
-              <mainClass>tictactoe.Echo9CharsServer</mainClass>
+              <mainClass>tictactoe.TicTacToeServer</mainClass>
             </manifest>
           </archive>
         </configuration>
