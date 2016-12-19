@@ -7,7 +7,7 @@ public enum PlayState {
 	WIN(b -> 1),
 	DRAW(b -> 0),
 	LOSS(b -> -1),
-	IN_PLAY(b -> b.getPlayersResponse().determineFinalOutcome().getFinalOutcome(b));
+	IN_PLAY(b -> b.getPlayersResponse().determineFinalOutcome().toInt()); //final outcome will never return in play so no board applied
 	
 	Function<Board, Integer> finalOutcomeFinder;
 	
@@ -17,5 +17,10 @@ public enum PlayState {
 	
 	public int getFinalOutcome(Board b) {
 		return finalOutcomeFinder.apply(b);
+	}
+	
+	private int toInt() {
+		if (this == IN_PLAY) throw new UnsupportedOperationException("this method is only supported on finished boards.");
+		return finalOutcomeFinder.apply(null);
 	}
 }

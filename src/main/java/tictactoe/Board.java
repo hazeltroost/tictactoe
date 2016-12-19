@@ -37,6 +37,7 @@ public class Board implements Comparable<Board> {
 		if (playState == IN_PLAY) { //call was made, board is in play
 			finalOutcome = getPlayersResponse().determineFinalOutcome();
 		}
+		assert finalOutcome != IN_PLAY;
 		return finalOutcome;
 	}
 
