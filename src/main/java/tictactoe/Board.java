@@ -11,17 +11,17 @@ public class Board implements Comparable<Board> {
 
 	static final char BLANK_SPACE = ' ';
 	static final char NO_ONE = BLANK_SPACE;
-	char[][] positions;
+	char[][] movesOnBoard;
 	final Player player;
 	PlayState playState = null; 
 
 	public Board(char[][] currentState, Player player) {
-		positions = currentState;
+		movesOnBoard = currentState;
 		this.player = player;
 	}
 
 	char[][] copyOfMovesOnBoard() {
-		return Arrays.stream(positions).map(el -> el.clone()).toArray($ -> positions.clone());
+		return Arrays.stream(movesOnBoard).map(el -> el.clone()).toArray($ -> movesOnBoard.clone());
 	}
 
 	public Board getPlayersResponse() {
@@ -41,7 +41,7 @@ public class Board implements Comparable<Board> {
 	}
 
 	private boolean isDraw() {
-		for (char[] row : positions) {
+		for (char[] row : movesOnBoard) {
 			for (char c : row) {
 				if (c == BLANK_SPACE)
 					return false;
@@ -53,17 +53,17 @@ public class Board implements Comparable<Board> {
 	private char findVictor() {
 		char winner = NO_ONE;
 		for (int i = 0; i < 3; i++) {
-			char rowResult = didSomeoneWin(positions[i][0], positions[i][1], positions[i][2]);
+			char rowResult = didSomeoneWin(movesOnBoard[i][0], movesOnBoard[i][1], movesOnBoard[i][2]);
 			winner = validateWin(winner, rowResult);
 		}
 		for (int i = 0; i < 3; i++) { 
-			char columnResult = didSomeoneWin(positions[0][i], positions[1][i], positions[2][i]);
+			char columnResult = didSomeoneWin(movesOnBoard[0][i], movesOnBoard[1][i], movesOnBoard[2][i]);
 			winner = validateWin(winner, columnResult);
 		}
-		char descendingDiagonalResult = didSomeoneWin(positions[0][0], positions[1][1], positions[2][2]);
+		char descendingDiagonalResult = didSomeoneWin(movesOnBoard[0][0], movesOnBoard[1][1], movesOnBoard[2][2]);
 		winner = validateWin(winner, descendingDiagonalResult);
 		
-		char ascendingDiagonalResult = didSomeoneWin(positions[2][0], positions[1][1], positions[0][2]);
+		char ascendingDiagonalResult = didSomeoneWin(movesOnBoard[2][0], movesOnBoard[1][1], movesOnBoard[0][2]);
 		winner = validateWin(winner, ascendingDiagonalResult);
 		return winner;
 	}
@@ -125,12 +125,12 @@ public class Board implements Comparable<Board> {
 		Board otherBoard = (Board) o;
 		if (player != otherBoard.player) return false;
 		
-		return Arrays.deepEquals(positions, otherBoard.positions);
+		return Arrays.deepEquals(movesOnBoard, otherBoard.movesOnBoard);
 	}
 	
 	public String toString() {
 		StringBuilder b = new StringBuilder();
-		for (char[] row : positions) {
+		for (char[] row : movesOnBoard) {
 			for (char c : row) {
 				b.append(c);
 			}
@@ -141,7 +141,7 @@ public class Board implements Comparable<Board> {
 	public void prettyPrint() {
 		System.out.println("Current play state:" + findCurrentPlayState());
 		System.out.println("------");
-		for (char[] row : positions) {
+		for (char[] row : movesOnBoard) {
 			System.out.println(row[0] + "|" + row[1] + "|" + row[2]);
 			System.out.println("------");
 		}
