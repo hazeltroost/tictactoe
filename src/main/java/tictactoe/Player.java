@@ -37,7 +37,7 @@ public enum Player {
 		List<Board> possibleResponses = new ArrayList<>();
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
-				if (b.positions[i][j] == Board.BLANK_SPACE) {
+				if (b.movesOnBoard[i][j] == Board.BLANK_SPACE) {
 					char[][] newPositions = b.copyOfMovesOnBoard();
 					newPositions[i][j] = representation;
 					possibleResponses.add(new Board(newPositions, getOpposingPlayer()));
