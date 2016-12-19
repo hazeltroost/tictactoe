@@ -2,6 +2,7 @@ package tictactoe;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import static tictactoe.PlayState.*;
 
 import spark.Spark;
 
@@ -20,15 +21,14 @@ public class TicTacToeServer {
 				LOGGER.info(param);
 				Board board = BoardParser.parse(param);
 				board.prettyPrint();
-				if (board.getDecision() != -2) throw new IllegalArgumentException("board that was sent had already been won");
-				Board response = board.getResponse();
+				if (board.getCurrentPlayState() != IN_PLAY) throw new IllegalArgumentException("board that was sent had already been won");
+				Board response = board.getPlayersResponse();
 				response.prettyPrint();
 				return response.toString();
-						//param.replaceAll("\\+", " ") + "\nchecking for easier push";
 			} catch (Exception e) {
 				e.printStackTrace();
 				res.status(400);
-				return "";
+				return e.getMessage();
 			}
 		});
 	}
